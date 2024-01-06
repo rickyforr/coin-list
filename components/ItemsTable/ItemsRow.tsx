@@ -1,5 +1,5 @@
 import { Item } from "@/system/types";
-import { Flex } from "@chakra-ui/react";
+import { Td, Tr } from "@chakra-ui/react";
 
 type Props = {
   item: Item;
@@ -11,11 +11,9 @@ type Props = {
  */
 export const ItemsRow = ({ item }: Props) => {
   return (
-    <div>
-      <Flex>
-        <div>{item.name}</div>
-        <div>{item.price}</div>
-      </Flex>
-    </div>
+    <Tr>
+      <Td>{item.name}</Td>
+      <Td>{item.price}</Td>
+    </Tr>
   );
 };
