@@ -1,13 +1,32 @@
+import { useState } from "react";
 import { Item } from "./types";
 
-export const useGetItems = (): { items: Item[] } => {
+const mockData: Item[] = [
+    {id: '1', isFavorite: false, name: 'Item 1', price: 100},
+    {id: '2', isFavorite: false, name: 'Item 2', price: 200},
+    {id: '3', isFavorite: false, name: 'Item 3', price: 300},
+    {id: '4', isFavorite: false, name: 'Item 4', price: 400},
+    {id: '5', isFavorite: false, name: 'Item 5', price: 500},
+];
+export const useGetItems = () => {
+  const [items, setItems] = useState<Item[]>(mockData);
+
+  const updateItemFavorite = (id: string, isFavorite: boolean) => {
+    const newItems = items.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          isFavorite,
+        };
+      }
+      return item;
+    });
+    setItems(newItems);
+  }
+
   return {
-    items: [
-      { name: "item1", price: 100 },
-      { name: "item2", price: 200 },
-      { name: "item3", price: 300 },
-      { name: "item4", price: 400 },
-      { name: "item5", price: 500 },
-    ],
+    items,
+    favorites: items.filter((item) => item.isFavorite),
+    onUpdateItemFavorite: updateItemFavorite,
   };
 };

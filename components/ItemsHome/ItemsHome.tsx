@@ -8,6 +8,7 @@ import { useContext } from "react";
  */
 export const ItemsHome = () => {
   const { items } = useContext(ItemsContext);
+  
   return (
     <Flex>
       <ItemsTable items={items} />

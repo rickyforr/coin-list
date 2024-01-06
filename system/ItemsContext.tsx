@@ -4,6 +4,8 @@ import { Item } from "./types";
 
 interface IItemsContext {
   items: Item[];
+  favorites: Item[];
+  onUpdateItemFavorite: (id: string, isFavorite: boolean) => void;
 }
 
 export const ItemsContext = createContext<IItemsContext>({} as IItemsContext);
