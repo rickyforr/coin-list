@@ -36,11 +36,12 @@ export const ItemsTable = ({ items, favorites }: Props) => {
 
   return (
     <TableContainer>
-      <Table size="lg">
+      <Table size="lg" width="80vw" variant="unstyled">
         <Thead>
           <Tr>
-            <Th>
-              <Checkbox onChange={handleFilterItems} />
+            <Th display="flex" alignItems="center">
+              <Checkbox onChange={handleFilterItems} colorScheme="gray" mr="1rem" />
+              Favorites
             </Th>
             <Th>Name</Th>
             <Th>Price</Th>

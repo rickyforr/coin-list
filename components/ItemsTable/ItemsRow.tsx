@@ -1,8 +1,15 @@
 import { ItemsContext } from "@/system/ItemsContext";
 import { Item } from "@/system/types";
-import { Avatar, Checkbox, Flex, Td, Tr, useDisclosure } from "@chakra-ui/react";
+import {
+  Avatar,
+  Flex,
+  Td,
+  Tr,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { ItemDetails } from "../ItemDetails/ItemDetails";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 type Props = {
   item: Item;
@@ -33,12 +40,7 @@ export const ItemsRow = ({ item }: Props) => {
   };
 
   return (
-    <Tr
-      _hover={{
-        cursor: "pointer",
-        backgroundColor: "gray.100",
-      }}
-    >
+    <>
       {isOpen && (
         <ItemDetails
           item={item}
@@ -47,15 +49,25 @@ export const ItemsRow = ({ item }: Props) => {
           onClose={onClose}
         />
       )}
-      <Td>
-        <Checkbox
-          isChecked={item.isFavorite}
-          onChange={handleChangeFavorite}
-          zIndex={100}
-        />
-      </Td>
-      {renderClickableCell(item.name, <Avatar size="sm" name={item.name} mr="1rem" />)}
-      {renderClickableCell(item.price)}
-    </Tr>
+      <Tr
+        _hover={{
+          cursor: "pointer",
+          backgroundColor: "gray.100",
+        }}
+      >
+        <Td>
+          {item.isFavorite ? (
+            <FaHeart color="black" onClick={handleChangeFavorite} />
+          ) : (
+            <FaRegHeart color="black" onClick={handleChangeFavorite} />
+          )}
+        </Td>
+        {renderClickableCell(
+          item.name,
+          <Avatar size="sm" name={item.name} mr="1rem" />
+        )}
+        {renderClickableCell(item.price)}
+      </Tr>
+    </>
   );
 };
