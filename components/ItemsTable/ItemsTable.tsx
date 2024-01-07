@@ -9,19 +9,18 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { ItemsContext } from "@/system/ItemsContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 type Props = {
   items: Item[];
+  favorites: Item[];
 };
 
 /**
  * Renders a table of items.
  * @param props.items The items to render.
  */
-export const ItemsTable = ({ items }: Props) => {
-  const { favorites } = useContext(ItemsContext);
+export const ItemsTable = ({ items, favorites }: Props) => {
   const [favoritesFilterOn, setFavoritesFilterOn] = useState<boolean>(false);
 
   const handleFilterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +36,7 @@ export const ItemsTable = ({ items }: Props) => {
 
   return (
     <TableContainer>
-      <Table>
+      <Table size="lg">
         <Thead>
           <Tr>
             <Th>

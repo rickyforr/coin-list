@@ -1,7 +1,7 @@
 import { ItemsContext } from "@/system/ItemsContext";
 import { Item } from "@/system/types";
-import { Checkbox, Td, Tr, useDisclosure } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { Avatar, Checkbox, Flex, Td, Tr, useDisclosure } from "@chakra-ui/react";
+import { useContext } from "react";
 import { ItemDetails } from "../ItemDetails/ItemDetails";
 
 type Props = {
@@ -9,7 +9,8 @@ type Props = {
 };
 
 /**
- * Renders a row of an item.
+ * Renders a table row displaying item data.
+ * Clicking on the row will open a modal with the item details
  * @param props.item The item to render.
  */
 export const ItemsRow = ({ item }: Props) => {
@@ -20,8 +21,15 @@ export const ItemsRow = ({ item }: Props) => {
     onUpdateItemFavorite(item.id, !item.isFavorite);
   };
 
-  const renderClickableCell = (cellData: any) => {
-    return <Td onClick={onOpen}>{cellData}</Td>;
+  const renderClickableCell = (cellData: any, icon?: React.ReactNode) => {
+    return (
+      <Td onClick={onOpen}>
+        <Flex alignItems="center">
+          {icon}
+          {cellData}
+        </Flex>
+      </Td>
+    );
   };
 
   return (
@@ -46,7 +54,7 @@ export const ItemsRow = ({ item }: Props) => {
           zIndex={100}
         />
       </Td>
-      {renderClickableCell(item.name)}
+      {renderClickableCell(item.name, <Avatar size="sm" name={item.name} mr="1rem" />)}
       {renderClickableCell(item.price)}
     </Tr>
   );

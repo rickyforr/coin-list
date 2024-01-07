@@ -5,11 +5,15 @@ import { Item } from "./types";
 interface IItemsContext {
   items: Item[];
   favorites: Item[];
-  onUpdateItemFavorite: (id: string, isFavorite: boolean) => void;
+  onUpdateItemFavorite: (id: number, isFavorite: boolean) => void;
 }
 
 export const ItemsContext = createContext<IItemsContext>({} as IItemsContext);
 
+/**
+ * A provider for the items context, 
+ * giving any child components access to the items and associated methods.
+ */
 export const ItemsProvider: React.FC<{ children: any }> = ({ children }) => {
   const items = useGetItems();
 

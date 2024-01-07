@@ -8,7 +8,8 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  useDisclosure,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -22,6 +23,9 @@ type Props = {
 /**
  * Renders a modal with the details of an item.
  * @param props.item The item to render.
+ * @param props.isOpen Whether the modal is open.
+ * @param props.onOpen Callback to open the modal.
+ * @param props.onClose Callback to close the modal.
  */
 export const ItemDetails = ({ item, isOpen, onClose, onOpen }: Props) => {
   useEffect(() => {
@@ -34,13 +38,28 @@ export const ItemDetails = ({ item, isOpen, onClose, onOpen }: Props) => {
         <ModalContent>
           <ModalHeader>{item.name}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>asdasdaadssdsad</ModalBody>
-
+          <ModalBody>
+            <Flex>
+              <Text>ID:</Text>
+              <Text>{item.id}</Text>
+            </Flex>
+            <Flex>
+              <Text>Volume: </Text>
+              <Text>{item.volume_24h}</Text>
+            </Flex>
+            <Flex>
+              <Text>Price: </Text>
+              <Text>{item.price}</Text>
+            </Flex>
+            <Flex>
+              <Text>Supply: </Text>
+              <Text>{item.total_supply}</Text>
+            </Flex>
+          </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
