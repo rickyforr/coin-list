@@ -10,6 +10,7 @@ import {
 import { useContext } from "react";
 import { ItemDetails } from "../ItemDetails/ItemDetails";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FAVORITE_ICON_COLOR, ITEM_HIGHLIGHT_COLOR } from "@/styles/theme";
 
 type Props = {
   item: Item;
@@ -52,14 +53,14 @@ export const ItemsRow = ({ item }: Props) => {
       <Tr
         _hover={{
           cursor: "pointer",
-          backgroundColor: "gray.100",
+          backgroundColor: ITEM_HIGHLIGHT_COLOR,
         }}
       >
         <Td>
           {item.isFavorite ? (
-            <FaHeart color="black" onClick={handleChangeFavorite} />
+            <FaHeart color={FAVORITE_ICON_COLOR} onClick={handleChangeFavorite} />
           ) : (
-            <FaRegHeart color="black" onClick={handleChangeFavorite} />
+            <FaRegHeart color={FAVORITE_ICON_COLOR} onClick={handleChangeFavorite} />
           )}
         </Td>
         {renderClickableCell(

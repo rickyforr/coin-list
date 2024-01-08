@@ -2,6 +2,7 @@ import { CoinsResponse, Item } from "@/system/types";
 import {
   changeFavoriteStatus,
   convertCoinsResponseToItems,
+  isUsernameValid,
 } from "@/system/utils";
 import "@testing-library/jest-dom";
 
@@ -69,4 +70,22 @@ describe("App Utils", () => {
     expect(updatedItems[0].isFavorite).toBe(true);
     expect(updatedItems[1].isFavorite).toBe(false);
   });
+
+  it("returns true if username is valid", () => {
+    const username = "test";
+    const isValid = isUsernameValid(username);
+    expect(isValid).toBe(true);
+  });
+
+  it("returns false if username is invalid", () => {
+    const username = "adfjdkjfdalkjfldsajfkajsldkjflkasdjfkjalsdjkfjalskjdfj"
+    const isValid = isUsernameValid(username);
+    expect(isValid).toBe(false);
+  });
+
+  it("returns false if username contains special characters", () => {
+    const username = "test&"
+    const isValid = isUsernameValid(username);
+    expect(isValid).toBe(false);
+  })
 });

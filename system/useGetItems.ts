@@ -4,9 +4,16 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { changeFavoriteStatus, convertCoinsResponseToItems } from "./utils";
 
+/**
+ * Hook that fetches the currency data and stores the result in state.
+ * @returns The items, favorites, and a function to update the favorite status of an item
+ */
 export const useGetItems = () => {
   const [items, setItems] = useState<Item[]>([]);
 
+  /**
+   * Get the currency data from the CoinMarketCap API.
+   */
   const getBtcToUsdPrice = async (): Promise<Item[]> => {
     try {
       const response = await axios.get<CoinsResponse>("/api/coins");
@@ -17,22 +24,31 @@ export const useGetItems = () => {
     }
   };
 
-  const info = useQuery({
+  /**
+   * A react-query hook that fetches data from an API and caches the result.
+   * Also, it will refetch the data every 60 seconds.
+   */
+  const coins = useQuery({
     queryKey: ["coins"],
     queryFn: getBtcToUsdPrice,
-    refetchInterval: 100000,
+    refetchInterval: 60000,
   });
 
+  /**
+   * Update the favorite status of an item.
+   * @param id The id of the item.
+   * @param isFavorite The new favorite status of the item.
+   */
   const updateItemFavorite = (id: number, isFavorite: boolean) => {
     const newItems = changeFavoriteStatus(isFavorite, items, id);
     setItems(newItems);
   };
 
   useEffect(() => {
-    if (info.isSuccess) {
-      setItems(info.data);
+    if (coins.isSuccess) {
+      setItems(coins.data);
     }
-  }, [info.isSuccess]);
+  }, [coins.isSuccess]);
 
   return {
     items,

@@ -1,5 +1,9 @@
 import { CoinsResponse, Item } from "./types";
 
+/**
+ * Function that converts the coins api response to a list of items.
+ * @param coinsResponse
+ */
 export const convertCoinsResponseToItems = (coinsResponse: CoinsResponse) => {
   let newCurrencyItems = [];
   for (let key in coinsResponse.coins) {
@@ -15,6 +19,12 @@ export const convertCoinsResponseToItems = (coinsResponse: CoinsResponse) => {
   return newCurrencyItems;
 };
 
+/**
+ * Function that updates the favorite status of an item.
+ * @param newStatus 
+ * @param items 
+ * @param id 
+ */
 export const changeFavoriteStatus = (
   newStatus: boolean,
   items: Item[],
@@ -31,3 +41,14 @@ export const changeFavoriteStatus = (
   });
   return updatedItems;
 };
+
+/**
+ * Returns true if the username is valid.
+ * @param username
+ */
+export const isUsernameValid = (username: string) => {
+    if (username.length < 50 && /^[a-zA-Z0-9]+$/.test(username)) {
+        return true;
+    }
+    return false;
+}

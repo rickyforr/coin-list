@@ -10,6 +10,7 @@ import {
   ModalFooter,
   Flex,
   Text,
+  DarkMode,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -33,36 +34,38 @@ export const ItemDetails = ({ item, isOpen, onClose, onOpen }: Props) => {
   }, []);
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{item.name}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex>
-              <Text>ID:</Text>
-              <Text>{item.id}</Text>
-            </Flex>
-            <Flex>
-              <Text>Volume: </Text>
-              <Text>{item.volume_24h}</Text>
-            </Flex>
-            <Flex>
-              <Text>Price: </Text>
-              <Text>{item.price}</Text>
-            </Flex>
-            <Flex>
-              <Text>Supply: </Text>
-              <Text>{item.total_supply}</Text>
-            </Flex>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DarkMode>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>{item.name}</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Flex>
+                <Text>ID:</Text>
+                <Text>{item.id}</Text>
+              </Flex>
+              <Flex>
+                <Text>Volume: </Text>
+                <Text>{item.volume_24h}</Text>
+              </Flex>
+              <Flex>
+                <Text>Price: </Text>
+                <Text>{item.price}</Text>
+              </Flex>
+              <Flex>
+                <Text>Supply: </Text>
+                <Text>{item.total_supply}</Text>
+              </Flex>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </DarkMode>
     </>
   );
 };
