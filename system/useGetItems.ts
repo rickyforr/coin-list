@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { CoinsResponse, Item } from "./types";
-import axios from "axios";
+import { Item } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import { changeFavoriteStatus, convertCoinsResponseToItems } from "./utils";
 
@@ -15,8 +14,9 @@ export const useGetItems = () => {
    */
   const getBtcToUsdPrice = async (): Promise<Item[]> => {
     try {
-      const response = await axios.get<CoinsResponse>("/api/coins");
-      return convertCoinsResponseToItems(response.data);
+      const response = await fetch("/api/coins");
+      const responseData = await response.json();
+      return convertCoinsResponseToItems(responseData.data);
     } catch (error) {
       console.log("error", error);
       return [];
