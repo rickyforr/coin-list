@@ -15,8 +15,9 @@ export const useGetItems = () => {
   const getBtcToUsdPrice = async (): Promise<Item[]> => {
     try {
       const response = await fetch("/api/coins");
-      const responseData = await response.json();
-      return convertCoinsResponseToItems(responseData.data);
+      const data = await response.json();
+
+      return convertCoinsResponseToItems(data);
     } catch (error) {
       console.log("error", error);
       return [];
