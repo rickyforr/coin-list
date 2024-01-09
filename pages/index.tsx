@@ -1,11 +1,8 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import { ItemsHome } from "@/components/ItemsHome/ItemsHome";
 import { ItemsProvider } from "@/system/ItemsContext";
 import { Header } from "@/components/Header/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const queryClient = new QueryClient();

@@ -7,11 +7,11 @@ import { useContext } from "react";
  * Renders a page for displaying all users items.
  */
 export const ItemsHome = () => {
-  const { items, favorites } = useContext(ItemsContext);
+  const { items, favorites, pending } = useContext(ItemsContext);
 
   return (
     <Flex justifyContent="center" alignItems="center">
-      <ItemsTable items={items} favorites={favorites}/>
+      <ItemsTable items={items} favorites={favorites} pending={pending} />
     </Flex>
   );
 };

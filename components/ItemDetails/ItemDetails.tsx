@@ -13,6 +13,7 @@ import {
   DarkMode,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import styles from "../../styles/ItemDetails.module.css";
 
 type Props = {
   item: Item;
@@ -42,20 +43,24 @@ export const ItemDetails = ({ item, isOpen, onClose, onOpen }: Props) => {
             <ModalCloseButton />
             <ModalBody>
               <Flex>
-                <Text>ID:</Text>
-                <Text>{item.id}</Text>
+                <Text className={styles.itemPropertyText}>ID:</Text>
+                <Text className={styles.itemPropertyValue}>{item.id}</Text>
               </Flex>
               <Flex>
-                <Text>Volume: </Text>
-                <Text>{item.volume_24h}</Text>
+                <Text className={styles.itemPropertyText}>Volume: </Text>
+                <Text className={styles.itemPropertyValue}>
+                  {item.volume_24h}
+                </Text>
               </Flex>
               <Flex>
-                <Text>Price: </Text>
-                <Text>{item.price}</Text>
+                <Text className={styles.itemPropertyText}>Price: </Text>
+                <Text className={styles.itemPropertyValue}>${item.price}</Text>
               </Flex>
               <Flex>
-                <Text>Supply: </Text>
-                <Text>{item.total_supply}</Text>
+                <Text className={styles.itemPropertyText}>Supply: </Text>
+                <Text className={styles.itemPropertyValue}>
+                  {item.total_supply}
+                </Text>
               </Flex>
             </ModalBody>
             <ModalFooter>

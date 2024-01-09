@@ -1,12 +1,6 @@
 import { ItemsContext } from "@/system/ItemsContext";
 import { Item } from "@/system/types";
-import {
-  Avatar,
-  Flex,
-  Td,
-  Tr,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Avatar, Flex, Td, Tr, useDisclosure, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { ItemDetails } from "../ItemDetails/ItemDetails";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -34,7 +28,7 @@ export const ItemsRow = ({ item }: Props) => {
       <Td onClick={onOpen}>
         <Flex alignItems="center">
           {icon}
-          {cellData}
+          <Text _hover={{ textDecoration: "underline" }}>{cellData}</Text>
         </Flex>
       </Td>
     );
@@ -56,18 +50,18 @@ export const ItemsRow = ({ item }: Props) => {
           backgroundColor: ITEM_HIGHLIGHT_COLOR,
         }}
       >
-        <Td>
+        <Td onClick={handleChangeFavorite}>
           {item.isFavorite ? (
-            <FaHeart color={FAVORITE_ICON_COLOR} onClick={handleChangeFavorite} />
+            <FaHeart color={FAVORITE_ICON_COLOR} />
           ) : (
-            <FaRegHeart color={FAVORITE_ICON_COLOR} onClick={handleChangeFavorite} />
+            <FaRegHeart color={FAVORITE_ICON_COLOR} />
           )}
         </Td>
         {renderClickableCell(
           item.name,
           <Avatar size="sm" name={item.name} mr="1rem" />
         )}
-        {renderClickableCell(item.price)}
+        {renderClickableCell(item.price.toFixed(6), "$")}
       </Tr>
     </>
   );

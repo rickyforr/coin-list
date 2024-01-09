@@ -77,7 +77,7 @@ The UI components are located in the components folder. The components are broke
 #### useGetItems
 This hook is used to fetch the data from the api and store it in the state.
 
-### ItemsContext
+#### ItemsContext
 This context is used to store the data fetched from the api. This context is used to share data across the app.
 
 #### types

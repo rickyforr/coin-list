@@ -6,6 +6,7 @@ interface IItemsContext {
   items: Item[];
   favorites: Item[];
   onUpdateItemFavorite: (id: number, isFavorite: boolean) => void;
+  pending: boolean;
 }
 
 export const ItemsContext = createContext<IItemsContext>({} as IItemsContext);

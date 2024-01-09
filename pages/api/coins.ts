@@ -23,7 +23,6 @@ export default async function handler(
           },
         }
       );
-      console.log("response", response.data.data);
       res.status(200).json({coins: response.data.data})
     } catch (error) {
       res.status(500).json({ error })

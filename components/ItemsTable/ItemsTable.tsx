@@ -2,6 +2,7 @@ import { Item } from "@/system/types";
 import { ItemsRow } from "./ItemsRow";
 import {
   Checkbox,
+  Spinner,
   Table,
   TableContainer,
   Tbody,
@@ -14,13 +15,16 @@ import { useState } from "react";
 type Props = {
   items: Item[];
   favorites: Item[];
+  pending: boolean;
 };
 
 /**
  * Renders a table of items.
  * @param props.items The items to render.
+ * @param props.favorites The items to render.
+ * @param props.pending Whether the items are pending.
  */
-export const ItemsTable = ({ items, favorites }: Props) => {
+export const ItemsTable = ({ items, favorites, pending }: Props) => {
   const [favoritesFilterOn, setFavoritesFilterOn] = useState<boolean>(false);
 
   const handleFilterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,25 +36,33 @@ export const ItemsTable = ({ items, favorites }: Props) => {
     return list.map((item, index) => (
       <ItemsRow key={`${item.id}-${index}`} item={item} />
     ));
-  }
+  };
 
   return (
-    <TableContainer>
-      <Table size="lg" width="80vw" variant="unstyled">
-        <Thead>
-          <Tr>
-            <Th display="flex" alignItems="center">
-              <Checkbox onChange={handleFilterItems} colorScheme="gray" mr="1rem" />
-              Favorites
-            </Th>
-            <Th>Name</Th>
-            <Th>Price</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {renderRows(favoritesFilterOn ? favorites : items)}
-        </Tbody>
-      </Table>
+    <TableContainer mt="2rem">
+      {!items.length && !pending && "No items found."}
+      {!!items.length && (
+        <Table
+          size={{ base: "sm", sm: "lg" }}
+          width={{ base: "100vw", sm: "80vw" }}
+          variant="unstyled"
+        >
+          <Thead>
+            <Tr>
+              <Th display="flex" alignItems="center" width="2rem">
+                <Checkbox
+                  onChange={handleFilterItems}
+                  colorScheme="gray"
+                  mr="1rem"
+                />
+              </Th>
+              <Th>Name</Th>
+              <Th>Price {pending && <Spinner size="xs" />}</Th>
+            </Tr>
+          </Thead>
+          <Tbody>{renderRows(favoritesFilterOn ? favorites : items)}</Tbody>
+        </Table>
+      )}
     </TableContainer>
   );
 };

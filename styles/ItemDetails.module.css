@@ -1,0 +1,9 @@
+.itemPropertyText {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.itemPropertyValue {
+    margin-bottom: 0.5rem;
+}

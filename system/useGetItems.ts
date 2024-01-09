@@ -6,7 +6,6 @@ import { changeFavoriteStatus, convertCoinsResponseToItems } from "./utils";
 
 /**
  * Hook that fetches the currency data and stores the result in state.
- * @returns The items, favorites, and a function to update the favorite status of an item
  */
 export const useGetItems = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -54,5 +53,6 @@ export const useGetItems = () => {
     items,
     favorites: items.filter((item) => item.isFavorite),
     onUpdateItemFavorite: updateItemFavorite,
+    pending: coins.isRefetching || coins.isFetching,
   };
 };
