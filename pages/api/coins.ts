@@ -1,5 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
@@ -11,19 +10,16 @@ export default async function handler(
   res: NextApiResponse<Data | any>
 ) {
     try {
-      const response = await axios.get(
-        "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest",
+      const response = await fetch(
+        "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC,ETH,SOL,XRP,SHIB,BNB&convert=USD",
         {
           headers: {
             "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY!,
-          },
-          params: {
-            symbol: "BTC,ETH,SOL,XRP,SHIB,BNB",
-            convert: "USD",
-          },
+          }
         }
       );
-      res.status(200).json({coins: response.data.data})
+      const responseData = await response.json();
+      res.status(200).json({coins: responseData.data})
     } catch (error) {
       res.status(500).json({ error })
       console.log("error", error);

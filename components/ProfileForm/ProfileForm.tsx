@@ -38,7 +38,12 @@ export const ProfileForm = ({ isOpen, onClose, onSaveUsername }: Props) => {
 
   const handleSaveUsername = () => {
     if (error || !username) return;
-    onSaveUsername(username);
+    try {
+      onSaveUsername(username);
+    } catch (e) {
+      console.error(e); 
+      return
+    }
     onClose();
   }
 
